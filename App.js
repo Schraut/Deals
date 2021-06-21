@@ -1,14 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import ajax from './ajax';
+import DealList from './src/components/DealList';
+export default class App extends Component {
+  state = {
+    deals: [],
+  };
+
+  async componentDidMount() {
+    const deals = await ajax.fetchDeals();
+    this.setState({ deals });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Deals List</Text>
+        {this.state.deals.length > 0 ? (
+          <DealList deals={this.state.deals} />
+        ) : (
+          <Text>No deals</Text>
+        )}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -17,5 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: 40,
   },
 });
