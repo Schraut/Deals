@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-
-// My components
+import React, { useRef, Component } from 'react';
+import { Animated, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+// AJAX
 import ajax from './ajax';
+// My components
 import DealList from './src/components/DealList';
 import DealDetail from './src/components/DealDetail';
 import Searchbar from './src/components/SearchBar';
 export default class App extends Component {
+  fadeAnim = useRef(new Animated.Value(0)).current;
   state = {
     deals: [],
     dealsFromSearch: [],
