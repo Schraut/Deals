@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { Card } from 'react-native-paper';
 // show the price in dollars

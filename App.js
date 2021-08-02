@@ -1,13 +1,15 @@
 import React, { useRef, Component } from 'react';
-import { Animated, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 // AJAX
 import ajax from './ajax';
+// Status Bar
+import MyStatusBar from './src/components/StatusBar';
 // My components
 import DealList from './src/components/DealList';
 import DealDetail from './src/components/DealDetail';
 import Searchbar from './src/components/SearchBar';
+import { StatusBar } from 'expo-status-bar';
 export default class App extends Component {
-  fadeAnim = useRef(new Animated.Value(0)).current;
   state = {
     deals: [],
     dealsFromSearch: [],
@@ -50,10 +52,12 @@ export default class App extends Component {
   render() {
     if (this.state.currentDealId) {
       return (
-        <DealDetail
-          initialDealData={this.currentDeal()}
-          onBack={this.unsetCurrentDeal}
-        />
+        <>
+          <DealDetail
+            initialDealData={this.currentDeal()}
+            onBack={this.unsetCurrentDeal}
+          />
+        </>
       );
     }
     const dealsToDisplay =
@@ -63,15 +67,17 @@ export default class App extends Component {
 
     if (dealsToDisplay.length > 0) {
       return (
-        <SafeAreaView>
+        <>
+          <StatusBar />
           <Searchbar searchDeals={this.searchDeals} />
           <DealList deals={dealsToDisplay} onItemPress={this.setCurrentDeal} />
-        </SafeAreaView>
+        </>
       );
     }
 
     return (
       <View style={styles.container}>
+        <StatusBar />
         <Text>Deals List</Text>
         {this.state.deals.length > 0 ? (
           <DealList

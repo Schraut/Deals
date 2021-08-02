@@ -31,7 +31,9 @@ export default class SearchBar extends React.Component {
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
+    height: 60,
     marginHorizontal: 12,
+
+    paddingTop: Platform.OS === 'android' ? 25 : 0,
   },
 });

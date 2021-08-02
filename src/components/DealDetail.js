@@ -35,7 +35,7 @@ class DealDetail extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <TouchableOpacity onPress={this.props.onBack}>
-          <Text>Back</Text>
+          <Text style={styles.backNavText}>Back</Text>
         </TouchableOpacity>
         <Image source={{ uri: deal.media[0] }} style={styles.image} />
         <View>
@@ -70,6 +70,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    marginTop: 30,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  backNavText: {
+    fontSize: 25,
+    color: 'blue',
   },
 });
 
